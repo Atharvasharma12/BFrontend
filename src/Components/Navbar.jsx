@@ -11,10 +11,16 @@ function Navbar() {
           </h2>
         </div>
         <div className="text-white  items-center cursor-pointer hidden sm:flex ">
-          <ul className=" gap-5 flex items-center">
-            <li>Home</li>
-            <li>About</li>
-            <li>Contact</li>
+          <ul className=" gap-5 flex items-center ">
+            <li className="bg-transparent hover:bg-yellow-500 text-white font-semibold hover:text-gray-900 py-2 px-4 hover:border-transparent rounded">
+              Home
+            </li>
+            <li className="bg-transparent hover:bg-yellow-500 text-white font-semibold hover:text-gray-900 py-2 px-4   hover:border-transparent rounded">
+              About
+            </li>
+            <li className="bg-transparent hover:bg-yellow-500 text-white font-semibold hover:text-gray-900 py-2 px-4   hover:border-transparent rounded">
+              Contact
+            </li>
             <div className="flex gap-2 content-center item-center ml-1">
               <img
                 class="inline-block h-10 w-10 rounded-full ring-3 ring-white items-center "
@@ -32,17 +38,28 @@ function Navbar() {
               alt=""
             />
           </div>
-          <h4
-            className="cursor-pointer"
+
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6"
             onClick={() => {
               setToggle((prev) => !prev);
             }}
           >
-            Menu
-          </h4>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12H12m-8.25 5.25h16.5"
+            />
+          </svg>
+
           <div
             className={`${toggle ? "flex" : "hidden"}
-           absolute p-6 bg-gray-900 right-0 mx-4 my-2 top-20 flex rounded-xl sidebar min-w-[140px]
+           absolute p-6 bg-black right-0 mx-4 my-2 top-16  flex rounded-xl sidebar min-w-[140px] z-10
           `}
           >
             <ul className="flex flex-col items-center flex-1">
