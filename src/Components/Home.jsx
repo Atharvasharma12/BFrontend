@@ -3,7 +3,7 @@ import React from "react";
 const Home = () => {
   return (
     <>
-      <section className="bg-gray-900 w-full h-[550px]">
+      <section className="bg-gray-900 w-full sm:h-screen h-96">
         <div className="absolute top-44 ml-10 ">
           <h1 className="  text-5xl text-white text-left sm:text-4xl ">
             Get the things you need
