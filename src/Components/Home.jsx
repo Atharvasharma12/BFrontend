@@ -1,4 +1,6 @@
 import React from "react";
+import FeatureProducts from "./FeatureProducts";
+import Footer from "./Footer";
 
 const Home = () => {
   return (
@@ -17,6 +19,8 @@ const Home = () => {
           </button>
         </div>
       </section>
+      <FeatureProducts />
+      <Footer />
     </>
   );
 };

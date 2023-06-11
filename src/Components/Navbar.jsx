@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
-  
   const [toggle, setToggle] = useState(false);
   const [profileToggle, setProfileToggle] = useState(false);
 
@@ -50,12 +50,12 @@ function Navbar() {
                     Student
                   </span>
                   <div class="flex mt-4 space-x-3 md:mt-6">
-                    <a
-                      href="@"
+                    <Link
+                      to="./Login"
                       class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-black bg-yellow-500 rounded-lg hover:text-white hover:bg-gray-900  "
                     >
                       Login
-                    </a>
+                    </Link>
                     <a
                       href="@"
                       className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 border-solid border-2 rounded-lg  "
@@ -94,12 +94,12 @@ function Navbar() {
                   Student
                 </span>
                 <div class="flex mt-4 space-x-3 md:mt-6">
-                  <a
-                    href="@"
+                  <Link
+                    to="./Login"
                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-black bg-yellow-500 rounded-lg hover:text-white hover:bg-gray-900  "
                   >
                     Login
-                  </a>
+                  </Link>
                   <a
                     href="@"
                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 border-solid border-2 rounded-lg  "
