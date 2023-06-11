@@ -8,7 +8,7 @@ function FeatureProducts() {
         <h1 className="text-3xl font-semibold">
           Get the latest books from the seller
         </h1>
-        <div className="flex justify-center flex-wrap sm:flex-nowrap p-10">
+        <div className="flex justify-center flex-wrap sm:flex-nowrap p-10 ">
           <Products />
           <Products />
           <Products />

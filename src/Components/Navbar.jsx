@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
 function Navbar() {
+  
   const [toggle, setToggle] = useState(false);
   const [profileToggle, setProfileToggle] = useState(false);
+
   return (
     <>
       <div className="bg-gray-900 h-14 flex justify-around items-center">
@@ -31,32 +33,31 @@ function Navbar() {
               />
 
               <div
-                class={`${
-                  profileToggle ? "block" : "hidden"
-                } w-56 absolute top-14 right-10 max-w-sm bg-white border border-gray-200 rounded-lg shadow-black cursor-default `}
+                class={`${profileToggle ? "block" : "hidden"} w-56 absolute
+                top-14 right-10 max-w-sm bg-white border z-20 border-gray-200 rounded-lg shadow-black cursor-default`}
               >
                 <div class="flex justify-end px-4 pt-4"></div>
                 <div class="flex flex-col items-center pb-10">
                   <img
                     class="w-24 h-24 mb-3 rounded-full shadow-lg"
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU"
-                    alt="Bonnie image"
+                    alt="profileimage"
                   />
                   <h5 class="mb-1 text-xl font-medium text-gray-900 ">
-                    Bonnie Green
+                    Atharva sharma
                   </h5>
                   <span class="text-sm text-gray-500 dark:text-gray-400">
-                    Visual Designer
+                    Student
                   </span>
                   <div class="flex mt-4 space-x-3 md:mt-6">
                     <a
-                      href="#"
+                      href="@"
                       class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-black bg-yellow-500 rounded-lg hover:text-white hover:bg-gray-900  "
                     >
                       Login
                     </a>
                     <a
-                      href="#"
+                      href="@"
                       className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 border-solid border-2 rounded-lg  "
                     >
                       Account
@@ -70,10 +71,44 @@ function Navbar() {
         <div className="text-white sm:hidden flex items-center gap-4">
           <div className="flex gap-2 content-center item-center ml-1">
             <img
+              onClick={() => setProfileToggle((prev) => !prev)}
               class="inline-block h-10 w-10 rounded-full ring-3 ring-white items-center "
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU"
               alt=""
             />
+            <div
+              class={`${profileToggle ? "block" : "hidden"} w-56 absolute
+                top-14 right-10 max-w-sm bg-white border z-20 border-gray-200 rounded-lg shadow-black cursor-default`}
+            >
+              <div class="flex justify-end px-4 pt-4"></div>
+              <div class="flex flex-col items-center pb-10">
+                <img
+                  class="w-24 h-24 mb-3 rounded-full shadow-lg"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU"
+                  alt="profileimage"
+                />
+                <h5 class="mb-1 text-xl font-medium text-gray-900 ">
+                  Atharva sharma
+                </h5>
+                <span class="text-sm text-gray-500 dark:text-gray-400">
+                  Student
+                </span>
+                <div class="flex mt-4 space-x-3 md:mt-6">
+                  <a
+                    href="@"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-black bg-yellow-500 rounded-lg hover:text-white hover:bg-gray-900  "
+                  >
+                    Login
+                  </a>
+                  <a
+                    href="@"
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 border-solid border-2 rounded-lg  "
+                  >
+                    Account
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
 
           <svg
