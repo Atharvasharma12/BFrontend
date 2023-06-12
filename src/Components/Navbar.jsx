@@ -1,30 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 function Navbar() {
   const [toggle, setToggle] = useState(false);
   const [profileToggle, setProfileToggle] = useState(false);
+  let profileRef = useRef();
+  useEffect(() => {
+    let handler = (e) => {
+      console.log(profileRef.current.contains(e.target));
+      if (!profileRef.current.contains(e.target)) {
+        setProfileToggle(false);
+        setToggle(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
 
   return (
     <>
-      <div className="bg-gray-900 h-14 flex justify-around items-center">
+      <div className="bg-gray-900 h-14 flex justify-around items-center ">
         <div>
-          <h2 className=" text-white text-3xl font-bold cursor-pointer ">
-            Boekenza.
-          </h2>
+          <Link to="/">
+            <h2 className=" text-white text-3xl font-bold cursor-pointer ">
+              Boekenza.
+            </h2>
+          </Link>
         </div>
         <div className="text-white  items-center cursor-pointer hidden sm:flex ">
           <ul className=" gap-5 flex items-center ">
-            <li className="bg-transparent hover:bg-yellow-500 text-white font-semibold hover:text-gray-900 py-2 px-4 hover:border-transparent rounded">
-              Home
-            </li>
+            <Link to="/">
+              <li className="bg-transparent hover:bg-yellow-500 text-white font-semibold hover:text-gray-900 py-2 px-4 hover:border-transparent rounded">
+                Home
+              </li>
+            </Link>
             <li className="bg-transparent hover:bg-yellow-500 text-white font-semibold hover:text-gray-900 py-2 px-4   hover:border-transparent rounded">
               About
             </li>
             <li className="bg-transparent hover:bg-yellow-500 text-white font-semibold hover:text-gray-900 py-2 px-4   hover:border-transparent rounded">
               Contact
             </li>
-            <div className="flex gap-2 content-center item-center ml-1">
+            <div
+              className="flex gap-2 content-center item-center ml-1"
+              ref={profileRef}
+            >
               <img
                 onClick={() => setProfileToggle((prev) => !prev)}
                 class="inline-block h-10 w-10 rounded-full ring-3 ring-white items-center "
@@ -33,11 +54,10 @@ function Navbar() {
               />
 
               <div
-                class={`${profileToggle ? "block" : "hidden"} w-56 absolute
+                class={`${profileToggle ? "block" : "hidden"} w-56 absolute 
                 top-14 right-10 max-w-sm bg-white border z-20 border-gray-200 rounded-lg shadow-black cursor-default`}
               >
-                <div class="flex justify-end px-4 pt-4"></div>
-                <div class="flex flex-col items-center pb-10">
+                <div class="flex flex-col items-center pb-5 pt-5 ">
                   <img
                     class="w-24 h-24 mb-3 rounded-full shadow-lg"
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU"
@@ -49,7 +69,10 @@ function Navbar() {
                   <span class="text-sm text-gray-500 dark:text-gray-400">
                     Student
                   </span>
-                  <div class="flex mt-4 space-x-3 md:mt-6">
+                  <div
+                    class="flex mt-4 space-x-3 md:mt-6"
+                    onClick={() => setProfileToggle((prev) => !prev)}
+                  >
                     <Link
                       to="./Login"
                       class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-black bg-yellow-500 rounded-lg hover:text-white hover:bg-gray-900  "
@@ -68,7 +91,10 @@ function Navbar() {
             </div>
           </ul>
         </div>
-        <div className="text-white sm:hidden flex items-center gap-4">
+        <div
+          className="text-white sm:hidden flex items-center gap-4"
+          ref={profileRef}
+        >
           <div className="flex gap-2 content-center item-center ml-1">
             <img
               onClick={() => setProfileToggle((prev) => !prev)}
@@ -80,8 +106,7 @@ function Navbar() {
               class={`${profileToggle ? "block" : "hidden"} w-56 absolute
                 top-14 right-10 max-w-sm bg-white border z-20 border-gray-200 rounded-lg shadow-black cursor-default`}
             >
-              <div class="flex justify-end px-4 pt-4"></div>
-              <div class="flex flex-col items-center pb-10">
+              <div class="flex flex-col items-center pb-5 pt-5">
                 <img
                   class="w-24 h-24 mb-3 rounded-full shadow-lg"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU"
@@ -93,7 +118,10 @@ function Navbar() {
                 <span class="text-sm text-gray-500 dark:text-gray-400">
                   Student
                 </span>
-                <div class="flex mt-4 space-x-3 md:mt-6">
+                <div
+                  class="flex mt-4 space-x-3 md:mt-6"
+                  onClick={() => setProfileToggle((prev) => !prev)}
+                >
                   <Link
                     to="./Login"
                     class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-black bg-yellow-500 rounded-lg hover:text-white hover:bg-gray-900  "
@@ -110,8 +138,8 @@ function Navbar() {
               </div>
             </div>
           </div>
-
           <svg
+            ref={profileRef}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -128,14 +156,20 @@ function Navbar() {
               d="M3.75 6.75h16.5M3.75 12H12m-8.25 5.25h16.5"
             />
           </svg>
-
           <div
             className={`${toggle ? "flex" : "hidden"}
-           absolute p-6 bg-black right-0 mx-4 my-2 top-16  flex rounded-xl sidebar min-w-[140px] z-10
+           absolute p-6 bg-yellow-500 text-black right-0 mx-4 my-2 top-16  flex rounded-xl sidebar min-w-[140px] z-10
           `}
           >
-            <ul className="flex flex-col items-center flex-1">
-              <li className="mb-4">Home</li>
+            <ul
+              className="flex flex-col items-center flex-1"
+              onClick={() => {
+                setToggle((prev) => !prev);
+              }}
+            >
+              <Link to="/">
+                <li className="mb-4">Home</li>
+              </Link>
               <li className="mb-4">About</li>
               <li className="mb-4">Contact</li>
             </ul>
