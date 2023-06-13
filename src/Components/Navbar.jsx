@@ -5,14 +5,17 @@ function Navbar() {
   const [toggle, setToggle] = useState(false);
   const [profileToggle, setProfileToggle] = useState(false);
   let profileRef = useRef();
+  let toggleRef = useRef();
   useEffect(() => {
     let handler = (e) => {
-      console.log(profileRef.current.contains(e.target));
       if (!profileRef.current.contains(e.target)) {
         setProfileToggle(false);
+      }
+      if (!toggleRef.current.contains(e.target)) {
         setToggle(false);
       }
     };
+
     document.addEventListener("mousedown", handler);
     return () => {
       document.removeEventListener("mousedown", handler);
@@ -36,16 +39,15 @@ function Navbar() {
                 Home
               </li>
             </Link>
-            <li className="bg-transparent hover:bg-yellow-500 text-white font-semibold hover:text-gray-900 py-2 px-4   hover:border-transparent rounded">
-              About
-            </li>
+            <Link to="About">
+              <li className="bg-transparent hover:bg-yellow-500 text-white font-semibold hover:text-gray-900 py-2 px-4   hover:border-transparent rounded">
+                About
+              </li>
+            </Link>
             <li className="bg-transparent hover:bg-yellow-500 text-white font-semibold hover:text-gray-900 py-2 px-4   hover:border-transparent rounded">
               Contact
             </li>
-            <div
-              className="flex gap-2 content-center item-center ml-1"
-              ref={profileRef}
-            >
+            <div className="flex gap-2 content-center item-center ml-1">
               <img
                 onClick={() => setProfileToggle((prev) => !prev)}
                 class="inline-block h-10 w-10 rounded-full ring-3 ring-white items-center "
@@ -54,6 +56,7 @@ function Navbar() {
               />
 
               <div
+                ref={profileRef}
                 class={`${profileToggle ? "block" : "hidden"} w-56 absolute 
                 top-14 right-10 max-w-sm bg-white border z-20 border-gray-200 rounded-lg shadow-black cursor-default`}
               >
@@ -91,10 +94,8 @@ function Navbar() {
             </div>
           </ul>
         </div>
-        <div
-          className="text-white sm:hidden flex items-center gap-4"
-          ref={profileRef}
-        >
+        {/* for mobile */}
+        <div className="text-white sm:hidden flex items-center gap-4">
           <div className="flex gap-2 content-center item-center ml-1">
             <img
               onClick={() => setProfileToggle((prev) => !prev)}
@@ -119,6 +120,7 @@ function Navbar() {
                   Student
                 </span>
                 <div
+                  ref={profileRef}
                   class="flex mt-4 space-x-3 md:mt-6"
                   onClick={() => setProfileToggle((prev) => !prev)}
                 >
@@ -139,7 +141,6 @@ function Navbar() {
             </div>
           </div>
           <svg
-            ref={profileRef}
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -157,6 +158,7 @@ function Navbar() {
             />
           </svg>
           <div
+            ref={toggleRef}
             className={`${toggle ? "flex" : "hidden"}
            absolute p-6 bg-yellow-500 text-black right-0 mx-4 my-2 top-16  flex rounded-xl sidebar min-w-[140px] z-10
           `}
@@ -170,7 +172,9 @@ function Navbar() {
               <Link to="/">
                 <li className="mb-4">Home</li>
               </Link>
-              <li className="mb-4">About</li>
+              <Link to="About">
+                <li className="mb-4">About</li>
+              </Link>
               <li className="mb-4">Contact</li>
             </ul>
           </div>

@@ -189,6 +189,14 @@ function Footer() {
                       href="@"
                       class="text-gray-700 transition hover:text-yellow-500 dark:text-gray-200"
                     >
+                      Contact
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="@"
+                      class="text-gray-700 transition hover:text-yellow-500 dark:text-gray-200"
+                    >
                       Meet the Team
                     </a>
                   </li>
