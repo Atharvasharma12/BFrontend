@@ -56,11 +56,13 @@ function Navbar() {
               />
 
               <div
-                ref={profileRef}
                 class={`${profileToggle ? "block" : "hidden"} w-56 absolute 
                 top-14 right-10 max-w-sm bg-white border z-20 border-gray-200 rounded-lg shadow-black cursor-default`}
               >
-                <div class="flex flex-col items-center pb-5 pt-5 ">
+                <div
+                  class="flex flex-col items-center pb-5 pt-5 "
+                  ref={profileRef}
+                >
                   <img
                     class="w-24 h-24 mb-3 rounded-full shadow-lg"
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU"
