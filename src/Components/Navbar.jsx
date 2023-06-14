@@ -4,8 +4,10 @@ import { Link } from "react-router-dom";
 function Navbar() {
   const [toggle, setToggle] = useState(false);
   const [profileToggle, setProfileToggle] = useState(false);
+  const [profileToggleSm, setProfileToggleSm] = useState(false);
   let profileRef = useRef();
   let toggleRef = useRef();
+  let profileSmRef = useRef();
   useEffect(() => {
     let handler = (e) => {
       if (!profileRef.current.contains(e.target)) {
@@ -13,6 +15,9 @@ function Navbar() {
       }
       if (!toggleRef.current.contains(e.target)) {
         setToggle(false);
+      }
+      if (!profileSmRef.current.contains(e.target)) {
+        setProfileToggleSm(false);
       }
     };
 
@@ -49,19 +54,19 @@ function Navbar() {
             </li>
             <div className="flex gap-2 content-center item-center ml-1">
               <img
-                onClick={() => setProfileToggle((prev) => !prev)}
+                onClick={() => setProfileToggleSm((prev) => !prev)}
                 class="inline-block h-10 w-10 rounded-full ring-3 ring-white items-center "
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU"
                 alt=""
               />
 
               <div
-                class={`${profileToggle ? "block" : "hidden"} w-56 absolute 
-                top-14 right-10 max-w-sm bg-white border z-20 border-gray-200 rounded-lg shadow-black cursor-default`}
+                class={`${profileToggleSm ? "block" : "hidden"} w-56 absolute 
+                top-14 right-10 max-w-sm bg-white border z-20 border-gray-200 rounded-lg drop-shadow-xl cursor-default`}
               >
                 <div
                   class="flex flex-col items-center pb-5 pt-5 "
-                  ref={profileRef}
+                  ref={profileSmRef}
                 >
                   <img
                     class="w-24 h-24 mb-3 rounded-full shadow-lg"
@@ -76,7 +81,7 @@ function Navbar() {
                   </span>
                   <div
                     class="flex mt-4 space-x-3 md:mt-6"
-                    onClick={() => setProfileToggle((prev) => !prev)}
+                    onClick={() => setProfileToggleSm((prev) => !prev)}
                   >
                     <Link
                       to="./Login"
@@ -98,7 +103,7 @@ function Navbar() {
         </div>
         {/* for mobile */}
         <div className="text-white sm:hidden flex items-center gap-4">
-          <div className="flex gap-2 content-center item-center ml-1">
+          <div className="flex gap-2 content-center item-center ml-1  ">
             <img
               onClick={() => setProfileToggle((prev) => !prev)}
               class="inline-block h-10 w-10 rounded-full ring-3 ring-white items-center "
@@ -106,7 +111,9 @@ function Navbar() {
               alt=""
             />
             <div
-              class={`${profileToggle ? "block" : "hidden"} w-56 absolute
+              class={`${
+                profileToggle ? "block" : "hidden"
+              } w-56 absolute ease-in-out duration-100
                 top-14 right-10 max-w-sm bg-white border z-20 border-gray-200 rounded-lg shadow-black cursor-default`}
             >
               <div class="flex flex-col items-center pb-5 pt-5">
@@ -162,7 +169,7 @@ function Navbar() {
           <div
             ref={toggleRef}
             className={`${toggle ? "flex" : "hidden"}
-           absolute p-6 bg-yellow-500 text-black right-0 mx-4 my-2 top-16  flex rounded-xl sidebar min-w-[140px] z-10
+           absolute p-6 bg-yellow-500 border border-yellow-700 drop-shadow-xl text-black right-0 mx-4 my-2 top-16  flex rounded-xl sidebar min-w-[140px] z-10
           `}
           >
             <ul
