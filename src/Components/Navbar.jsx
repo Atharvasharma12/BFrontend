@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Navbar() {
   const [toggle, setToggle] = useState(false);
@@ -26,6 +27,8 @@ function Navbar() {
       document.removeEventListener("mousedown", handler);
     };
   });
+
+  const { name } = useSelector((state) => state.loggedInUser);
 
   return (
     <>
@@ -55,46 +58,48 @@ function Navbar() {
             <div className="flex gap-2 content-center item-center ml-1">
               <img
                 onClick={() => setProfileToggleSm((prev) => !prev)}
-                class="inline-block h-10 w-10 rounded-full ring-3 ring-white items-center "
+                className="inline-block h-10 w-10 rounded-full ring-3 ring-white items-center "
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU"
                 alt=""
               />
 
               <div
-                class={`${profileToggleSm ? "block" : "hidden"} w-56 absolute 
+                className={`${
+                  profileToggleSm ? "block" : "hidden"
+                } w-56 absolute 
                 top-14 right-10 max-w-sm bg-white border z-20 border-gray-200 rounded-lg drop-shadow-xl cursor-default`}
               >
                 <div
-                  class="flex flex-col items-center pb-5 pt-5 "
+                  className="flex flex-col items-center pb-5 pt-5 "
                   ref={profileSmRef}
                 >
                   <img
-                    class="w-24 h-24 mb-3 rounded-full shadow-lg"
+                    className="w-24 h-24 mb-3 rounded-full shadow-lg"
                     src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU"
                     alt="profileimage"
                   />
-                  <h5 class="mb-1 text-xl font-medium text-gray-900 ">
-                    Atharva sharma
+                  <h5 className="mb-1 text-xl font-medium text-gray-900 ">
+                    {name}
                   </h5>
-                  <span class="text-sm text-gray-500 dark:text-gray-400">
+                  <span className="text-sm text-gray-500 dark:text-gray-400">
                     Student
                   </span>
                   <div
-                    class="flex mt-4 space-x-3 md:mt-6"
+                    className="flex mt-4 space-x-3 md:mt-6"
                     onClick={() => setProfileToggleSm((prev) => !prev)}
                   >
                     <Link
                       to="./Login"
-                      class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-black bg-yellow-500 rounded-lg hover:text-white hover:bg-gray-900  "
+                      className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-black bg-yellow-500 rounded-lg hover:text-white hover:bg-gray-900  "
                     >
                       Login
                     </Link>
-                    <a
-                      href="@"
+                    <Link
+                      to="Account"
                       className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 border-solid border-2 rounded-lg  "
                     >
                       Account
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -106,45 +111,45 @@ function Navbar() {
           <div className="flex gap-2 content-center item-center ml-1  ">
             <img
               onClick={() => setProfileToggle((prev) => !prev)}
-              class="inline-block h-10 w-10 rounded-full ring-3 ring-white items-center "
+              className="inline-block h-10 w-10 rounded-full ring-3 ring-white items-center "
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU"
               alt=""
             />
             <div
-              class={`${
+              className={`${
                 profileToggle ? "block" : "hidden"
               } w-56 absolute ease-in-out duration-100
                 top-14 right-10 max-w-sm bg-white border z-20 border-gray-200 rounded-lg shadow-black cursor-default`}
             >
-              <div class="flex flex-col items-center pb-5 pt-5">
+              <div className="flex flex-col items-center pb-5 pt-5">
                 <img
-                  class="w-24 h-24 mb-3 rounded-full shadow-lg"
+                  className="w-24 h-24 mb-3 rounded-full shadow-lg"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6SGvshARHJ5GYSH_Kig8-cYNw5rO3nWn7mA&usqp=CAU"
                   alt="profileimage"
                 />
-                <h5 class="mb-1 text-xl font-medium text-gray-900 ">
+                <h5 className="mb-1 text-xl font-medium text-gray-900 ">
                   Atharva sharma
                 </h5>
-                <span class="text-sm text-gray-500 dark:text-gray-400">
+                <span className="text-sm text-gray-500 dark:text-gray-400">
                   Student
                 </span>
                 <div
                   ref={profileRef}
-                  class="flex mt-4 space-x-3 md:mt-6"
+                  className="flex mt-4 space-x-3 md:mt-6"
                   onClick={() => setProfileToggle((prev) => !prev)}
                 >
                   <Link
                     to="./Login"
-                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-black bg-yellow-500 rounded-lg hover:text-white hover:bg-gray-900  "
+                    className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-black bg-yellow-500 rounded-lg hover:text-white hover:bg-gray-900  "
                   >
                     Login
                   </Link>
-                  <a
-                    href="@"
+                  <Link
+                    to="Account"
                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 border-solid border-2 rounded-lg  "
                   >
                     Account
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

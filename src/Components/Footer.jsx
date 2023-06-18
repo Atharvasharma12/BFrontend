@@ -132,12 +132,12 @@ function Footer() {
 
                 <ul class="mt-6 space-y-4 text-sm">
                   <li>
-                    <a
-                      href="@"
+                    <Link
+                      to="/Account"
                       class="text-gray-700 transition hover:text-yellow-500 dark:text-gray-200"
                     >
                       My account
-                    </a>
+                    </Link>
                   </li>
 
                   <li>
@@ -150,12 +150,12 @@ function Footer() {
                   </li>
 
                   <li>
-                    <a
-                      href="@"
+                    <Link
+                      to="AllProducts"
                       class="text-gray-700 transition hover:text-yellow-500 dark:text-gray-200"
                     >
                       Buy
-                    </a>
+                    </Link>
                   </li>
 
                   <li>
@@ -176,12 +176,12 @@ function Footer() {
 
                 <ul class="mt-6 space-y-4 text-sm">
                   <li>
-                    <a
-                      href="@"
+                    <Link
+                      to="About"
                       class="text-gray-700 transition hover:text-yellow-500 dark:text-gray-200"
                     >
                       About
-                    </a>
+                    </Link>
                   </li>
 
                   <li>

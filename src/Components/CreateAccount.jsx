@@ -1,24 +1,22 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-function Login() {
-  const Navigate = useNavigate();
-
+function CreateAccount() {
   const [loginData, serLoginData] = useState({
+    userName: "",
     userMail: "",
     userPasswrod: "",
   });
 
-  const handelSubmitForm = (e) => {
-    e.preventDefault(); //prevent default behavior in case prevent refreshing
+  const handelSubmitForm = () => {
+    // e.preventDefault(); //prevent default behavior in case prevent refreshing
     axios
-      .post("/userLogin", loginData)
+      .post("/createAccount", loginData)
       .then((response) => {
         console.log(response.data);
         console.log(loginData);
-        Navigate("/");
       })
       .catch((error) => console.log(error));
   };
@@ -27,8 +25,27 @@ function Login() {
     <>
       <div className="flex justify-center mt-10">
         <div class="  w-full max-w-sm p-4  rounded-lg shadow sm:p-6 md:p-8 bg-gray-800 border-gray-700">
-          <form class="space-y-6" onSubmit={handelSubmitForm}>
-            <h5 class="text-xl font-medium text-white">Sign in</h5>
+          <div class="space-y-6">
+            <h5 class="text-xl font-medium text-white">Sign up</h5>
+            <div>
+              <label
+                for="name"
+                class="block mb-2 text-sm font-medium text-white"
+              >
+                Your name
+              </label>
+              <input
+                onChange={(e) => {
+                  serLoginData({ ...loginData, userName: e.target.value });
+                }}
+                type="text"
+                name="name"
+                id="name"
+                class="  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
+                placeholder="Name"
+                required
+              />
+            </div>
             <div>
               <label
                 for="email"
@@ -70,45 +87,24 @@ function Login() {
                 required
               />
             </div>
-            <div class="flex items-start">
-              <div class="flex items-start">
-                <div class="flex items-center h-5">
-                  <input
-                    id="remember"
-                    type="checkbox"
-                    value=""
-                    class="w-4 h-4 border  rounded  focus:ring-3  bg-gray-700 border-gray-600 focus:ring-yellow-500 ring-offset-gray-800 focus:ring-offset-gray-800"
-                    required
-                  />
-                </div>
-                <label
-                  for="remember"
-                  class="ml-2 text-sm font-medium text-gray-300"
-                >
-                  Remember me
-                </label>
-              </div>
-              <a href="@" class="ml-auto text-sm text-yellow-500">
-                Lost Password?
-              </a>
-            </div>
+
             <button
-              type="submit"
+              onClick={handelSubmitForm}
               class="w-full text-yellow-500 border  hover:text-gray-900 border-yellow-500  hover:bg-yellow-500  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center "
             >
               Login to your account
             </button>
             <div class="text-sm font-medium text-gray-300">
-              Not registered ?{"  "}
-              <Link to="/CreateAccount" class="text-yellow-500 hover:underline">
-                Create account
+              Already registered. {"  "}
+              <Link to="/Login" class="text-yellow-500 hover:underline">
+                Login
               </Link>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </>
   );
 }
 
-export default Login;
+export default CreateAccount;

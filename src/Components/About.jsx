@@ -8,7 +8,7 @@ function About() {
           <h1 className="text-2xl font-bold">What is Boekenza ?</h1>
           <div>
             <p className="text-justify m-5 ">
-              BOEKENZA is an innovative platform, designed to help students buy
+              Boekenza is an innovative platform, designed to help students buy
               and sell their used study materials, such as books and notes. Many
               students struggle with managing their study items, and often end
               up with unused materials that they no longer need. On the other
