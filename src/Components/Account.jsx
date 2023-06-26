@@ -1,8 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 function Account() {
   const { name, emailId } = useSelector((state) => state.loggedInUser);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -24,7 +25,15 @@ function Account() {
                 <button class=" sm:w-full mr-2 my-3 bg-transparent hover:bg-yellow-500 text-black font-semibold hover:text-gray-900 py-2 px-4 border border-yellow-500 hover:border-transparent rounded">
                   Edit Profile
                 </button>
-                <button class="sm:w-full  bg-gray-800 hover:bg-gray-700  text-white font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded">
+                <button
+                  onClick={() =>
+                    dispatch({
+                      type: "setLoggedInUser",
+                      payload: { name: "Profile" },
+                    })
+                  }
+                  class="sm:w-full  bg-gray-800 hover:bg-gray-700  text-white font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded"
+                >
                   Log out
                 </button>
               </div>

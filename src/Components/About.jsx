@@ -4,7 +4,7 @@ function About() {
   return (
     <>
       <section className="flex justify-center">
-        <div className="bg-yellow-500 m-10 p-8 h-full min-h-80 rounded-xl sm:flex-1">
+        <div className="bg-yellow-500 m-10 p-8 h-full min-h-80 rounded-xl sm:flex-1 drop-shadow-xl">
           <h1 className="text-2xl font-bold">What is Boekenza ?</h1>
           <div>
             <p className="text-justify m-5 ">

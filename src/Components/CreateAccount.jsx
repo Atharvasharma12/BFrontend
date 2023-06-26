@@ -1,9 +1,10 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function CreateAccount() {
+  const navigate = useNavigate();
   const [loginData, serLoginData] = useState({
     userName: "",
     userMail: "",
@@ -15,8 +16,9 @@ function CreateAccount() {
     axios
       .post("/createAccount", loginData)
       .then((response) => {
-        console.log(response.data);
-        console.log(loginData);
+        // console.log(response.data);
+        alert(response.data);
+        if (response.data == "Registered Successfully !") navigate("/Login");
       })
       .catch((error) => console.log(error));
   };

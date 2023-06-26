@@ -2,9 +2,11 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function Login() {
   const Navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [loginData, serLoginData] = useState({
     userMail: "",
@@ -16,17 +18,21 @@ function Login() {
     axios
       .post("/userLogin", loginData)
       .then((response) => {
-        console.log(response.data);
-        console.log(loginData);
-        Navigate("/");
+        console.log(response.data._id);
+        dispatch({
+          type: "setLoggedInUser",
+          payload: response.data,
+        });
+        alert(response.data.message);
+        if (response.data.message == "login successfull !") Navigate("/");
       })
       .catch((error) => console.log(error));
   };
 
   return (
     <>
-      <div className="flex justify-center mt-10">
-        <div class="  w-full max-w-sm p-4  rounded-lg shadow sm:p-6 md:p-8 bg-gray-800 border-gray-700">
+      <div className="flex justify-center mt-10  ">
+        <div class="  w-full max-w-sm p-4 shadow-xl rounded-lg shadow sm:p-6 md:p-8 bg-gray-800 border-gray-700">
           <form class="space-y-6" onSubmit={handelSubmitForm}>
             <h5 class="text-xl font-medium text-white">Sign in</h5>
             <div>
