@@ -8,6 +8,7 @@ import AllProducts from "./Components/AllProducts";
 import Account from "./Components/Account";
 import CreateAccount from "./Components/CreateAccount";
 import Protected from "./Components/Protected";
+import Sell from "./Components/Sell";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="About" element={<About />} />
         <Route path="Allproducts" element={<AllProducts />} />
         <Route path="Account" element={<Protected Component={Account} />} />
+        <Route path="Sell" element={<Protected Component={Sell} />} />
       </Routes>
     </>
   );

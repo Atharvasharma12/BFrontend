@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 function Navbar() {
   const [toggle, setToggle] = useState(false);
@@ -9,6 +9,8 @@ function Navbar() {
   let profileRef = useRef();
   let toggleRef = useRef();
   let profileSmRef = useRef();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     let handler = (e) => {
       if (!profileRef.current.contains(e.target)) {
@@ -91,8 +93,14 @@ function Navbar() {
                     <Link
                       to="./Login"
                       className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-black bg-yellow-500 rounded-lg hover:text-white hover:bg-gray-900  "
+                      onClick={() => {
+                        dispatch({
+                          type: "setLoggedInUser",
+                          payload: { name: "Profile" },
+                        });
+                      }}
                     >
-                      Login
+                      {name == "Profile" ? "login" : "logout"}
                     </Link>
                     <Link
                       to="Account"
@@ -141,8 +149,14 @@ function Navbar() {
                   <Link
                     to="./Login"
                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-black bg-yellow-500 rounded-lg hover:text-white hover:bg-gray-900  "
+                    onClick={() => {
+                      dispatch({
+                        type: "setLoggedInUser",
+                        payload: { name: "Profile" },
+                      });
+                    }}
                   >
-                    Login
+                    {name == "Profile" ? "login" : "logout"}
                   </Link>
                   <Link
                     to="Account"

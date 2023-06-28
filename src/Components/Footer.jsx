@@ -141,12 +141,12 @@ function Footer() {
                   </li>
 
                   <li>
-                    <a
-                      href="@"
+                    <Link
+                      to="Sell"
                       class="text-gray-700 transition hover:text-yellow-500 dark:text-gray-200"
                     >
                       Sell your product
-                    </a>
+                    </Link>
                   </li>
 
                   <li>

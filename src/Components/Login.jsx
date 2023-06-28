@@ -13,12 +13,13 @@ function Login() {
     userPasswrod: "",
   });
 
+ 
+
   const handelSubmitForm = (e) => {
     e.preventDefault(); //prevent default behavior in case prevent refreshing
     axios
       .post("/userLogin", loginData)
       .then((response) => {
-        console.log(response.data._id);
         dispatch({
           type: "setLoggedInUser",
           payload: response.data,

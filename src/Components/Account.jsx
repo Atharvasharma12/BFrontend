@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 
 function Account() {
   const { name, emailId } = useSelector((state) => state.loggedInUser);
   const dispatch = useDispatch();
+  useEffect(() => {
+    axios
+      .post("/account", name)
+      .then((response) => console.log(response))
+      .catch((error) => console.log(error));
+  }, [name]);
 
   return (
     <>
@@ -26,12 +33,17 @@ function Account() {
                   Edit Profile
                 </button>
                 <button
-                  onClick={() =>
+                  onClick={() => {
                     dispatch({
                       type: "setLoggedInUser",
                       payload: { name: "Profile" },
-                    })
-                  }
+                    });
+
+                    axios
+                      .post("/logout", name)
+                      .then((response) => console.log(response))
+                      .catch((error) => console.log(error));
+                  }}
                   class="sm:w-full  bg-gray-800 hover:bg-gray-700  text-white font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded"
                 >
                   Log out

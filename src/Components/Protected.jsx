@@ -7,6 +7,7 @@ function Protected(props) {
 
   const { Component } = props;
   const Navigate = useNavigate();
+
   useEffect(() => {
     if (!_id) {
       Navigate("/Login");
