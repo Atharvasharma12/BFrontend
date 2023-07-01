@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
 
 function Navbar() {
   const [toggle, setToggle] = useState(false);
@@ -98,6 +99,11 @@ function Navbar() {
                           type: "setLoggedInUser",
                           payload: { name: "Profile" },
                         });
+
+                        axios
+                          .post("/logout", name)
+                          .then((response) => console.log(response))
+                          .catch((error) => console.log(error));
                       }}
                     >
                       {name == "Profile" ? "login" : "logout"}
@@ -154,6 +160,11 @@ function Navbar() {
                         type: "setLoggedInUser",
                         payload: { name: "Profile" },
                       });
+
+                      // axios
+                      //   .post("/logout", name)
+                      //   .then((response) => console.log(response))
+                      //   .catch((error) => console.log(error));
                     }}
                   >
                     {name == "Profile" ? "login" : "logout"}

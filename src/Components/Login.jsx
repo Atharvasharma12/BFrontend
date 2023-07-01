@@ -33,7 +33,7 @@ function Login() {
   return (
     <>
       <div className="flex justify-center mt-10  ">
-        <div class="  w-full max-w-sm p-4 shadow-xl rounded-lg shadow sm:p-6 md:p-8 bg-gray-800 border-gray-700">
+        <div class="  w-full max-w-sm p-4 shadow-xl rounded-lg  sm:p-6 md:p-8 bg-gray-800 border-gray-700">
           <form class="space-y-6" onSubmit={handelSubmitForm}>
             <h5 class="text-xl font-medium text-white">Sign in</h5>
             <div>
