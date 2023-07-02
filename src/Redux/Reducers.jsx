@@ -13,3 +13,32 @@ export const loggedInUser = createReducer(initialLoggedInUser, {
     state._id = action.payload._id;
   },
 });
+
+let initialProducts = {
+  productName: "",
+  productCategory: "",
+  productDescription: "",
+  productPrice: "",
+  productImg: "",
+  sellerId: "",
+};
+
+export const usersProduct = createReducer(initialProducts, {
+  setUsersProduct: (state, action) => {
+    state.productName = action.payload.productName;
+    state.productCategory = action.payload.productCategory;
+    state.productDescription = action.payload.productDescription;
+    state.productPrice = action.payload.productPrice;
+    state.productImg = action.payload.productImg;
+  },
+});
+
+const iAllProducts = {
+  products: [],
+};
+
+export const allProducts = createReducer(iAllProducts, {
+  setAllProduct: (state, action) => {
+    state.products = action.payload;
+  },
+});

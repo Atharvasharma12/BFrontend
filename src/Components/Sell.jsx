@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useSelector } from "react-redux";
@@ -22,7 +22,10 @@ function Sell() {
     console.log(productDetail);
     axios
       .post("/uploadProduct", productDetail)
-      .then((response) => console.log(response.data))
+      .then((response) => {
+        console.log(response.data);
+        alert(response.data);
+      })
       .catch((err) => console.log(err));
   };
 

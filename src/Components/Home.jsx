@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FeatureProducts from "./FeatureProducts";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 const Home = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    axios
+      .get("/allProducts")
+      .then((res) => {
+        dispatch({
+          type: "setAllProduct",
+          payload: res.data,
+        });
+      })
+      .catch((err) => console.log(err));
+  });
+
   return (
     <>
       <section className="bg-gray-900 w-full sm:h-screen h-96">

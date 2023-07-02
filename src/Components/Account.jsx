@@ -1,16 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 function Account() {
-  const { name, emailId } = useSelector((state) => state.loggedInUser);
+  const { name, emailId, _id } = useSelector((state) => state.loggedInUser);
+  const [userProducts, setUserProducts] = useState([]);
+
   const dispatch = useDispatch();
   useEffect(() => {
     axios
-      .post("/account", name)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
-  }, [name]);
+      .post("/account", { userId: _id })
+      .then((res) => {
+        setUserProducts(res.data);
+        console.log("account");
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <>
@@ -41,7 +46,7 @@ function Account() {
 
                     axios
                       .post("/logout", name)
-                      .then((response) => console.log(response))
+                      .then((response) => window.alert(response.data))
                       .catch((error) => console.log(error));
                   }}
                   class="sm:w-full  bg-gray-800 hover:bg-gray-700  text-white font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded"
@@ -52,20 +57,30 @@ function Account() {
             </div>
             <div className="sm:w-full w-96 h-96 border m-3 border-gray-200 p-3 rounded-xl">
               <h3>Your active products</h3>
-              <div className=" sm:m-5 m-2 flex flex-row p-1 items-center justify-evenly h-20  bg-gray-100 rounded-md">
-                <div className=" h-[100%] flex m-1 ">
-                  <img src="banner.png" className="h-[100%]" alt="" />
-                </div>
-                <div className="font-bold">
-                  <h1>product name</h1>
-                </div>
-                <div className="text-green-600">
-                  <h1>product price</h1>
-                </div>
-                <div className="font-light">
-                  <h1>product time remaining</h1>
-                </div>
-              </div>
+              {userProducts.map((product, id) => {
+                return (
+                  <>
+                    <div className=" sm:m-5 m-2 flex flex-row p-1 items-center justify-evenly h-20  bg-gray-100 rounded-md">
+                      <div className=" h-[100%] flex m-1 ">
+                        <img
+                          src={product.productImg}
+                          className="h-[100%]"
+                          alt=""
+                        />
+                      </div>
+                      <div className="font-bold">
+                        <h1>{product.productName}</h1>
+                      </div>
+                      <div className="text-green-600">
+                        <h1>{product.productPrice}</h1>
+                      </div>
+                      <div className="font-light">
+                        <h1>{product.productDescription}</h1>
+                      </div>
+                    </div>
+                  </>
+                );
+              })}
             </div>
           </div>
         </div>

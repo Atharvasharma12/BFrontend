@@ -2,7 +2,8 @@ import React from "react";
 
 import { productDetails } from "./ProductList";
 
-function Products() {
+function Products(props) {
+  console.log(props);
   const items = productDetails;
 
   return (
