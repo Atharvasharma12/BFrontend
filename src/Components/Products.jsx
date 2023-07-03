@@ -1,6 +1,7 @@
 import React from "react";
 
 import { productDetails } from "./ProductList";
+import { Link } from "react-router-dom";
 
 function Products(props) {
   console.log(props);
@@ -8,7 +9,7 @@ function Products(props) {
 
   return (
     <div>
-      <div>
+      <div className="flex flex-row sm:w-full  w-96  overflow-x-auto ">
         {items.map((item, id) => {
           return (
             <>
@@ -34,12 +35,12 @@ function Products(props) {
                       <span className="text-3xl font-bold text-white">
                         Rs.{item.price}
                       </span>
-                      <a
-                        href="@"
+                      <Link
+                        to="SelectedProduct"
                         className="my-2  bg-yellow-500 hover:bg-transparent text-black-500 font-semibold hover:text-yellow-500 py-2 px-4 border border-yellow-500 hover:border-yellow-500 rounded "
                       >
-                        Purchase
-                      </a>
+                        <button>Purchase</button>
+                      </Link>
                     </div>
                   </div>
                 </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function AllProducts() {
   const dispatch = useDispatch();
@@ -22,6 +23,13 @@ function AllProducts() {
     };
     gettingItems();
   }, [dispatch]);
+
+  const handleOnPurchase = (item) => {
+    dispatch({
+      type: "setUsersProduct",
+      payload: item,
+    });
+  };
 
   return (
     <>
@@ -95,12 +103,13 @@ function AllProducts() {
                         <span className="text-3xl font-bold text-white">
                           Rs.{item.productPrice}
                         </span>
-                        <a
-                          href="@"
+                        <Link
+                          onClick={() => handleOnPurchase(item)}
+                          to="/SelectedProduct"
                           className="my-2  bg-yellow-500 hover:bg-transparent text-black-500 font-semibold hover:text-yellow-500 py-2 px-4 border border-yellow-500 hover:border-yellow-500 rounded "
                         >
                           Purchase
-                        </a>
+                        </Link>
                       </div>
                     </div>
                   </div>

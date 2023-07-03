@@ -14,7 +14,7 @@ export const productDetails = [
   {
     id: 2,
     img: "https://m.media-amazon.com/images/I/91e5sJArqQS._AC_UF1000,1000_QL80_.jpg",
-    name: "computer networiking semester IV",
+    name: "computer semester IV",
     price: 200,
   },
 ];
