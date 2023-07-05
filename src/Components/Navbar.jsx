@@ -175,15 +175,17 @@ function Navbar() {
                     to="./Login"
                     className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-black bg-yellow-500 rounded-lg hover:text-white hover:bg-gray-900  "
                     onClick={() => {
+                      localStorage.removeItem("jwt");
+
                       dispatch({
                         type: "setLoggedInUser",
                         payload: { name: "Profile" },
                       });
 
-                      // axios
-                      //   .post("/logout", name)
-                      //   .then((response) => console.log(response))
-                      //   .catch((error) => console.log(error));
+                      axios
+                        .post("/logout", name)
+                        .then((response) => console.log(response))
+                        .catch((error) => console.log(error));
                     }}
                   >
                     {name == "Profile" ? "login" : "logout"}

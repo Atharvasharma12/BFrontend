@@ -89,8 +89,8 @@ function Account() {
               {userProducts.map((product, id) => {
                 return (
                   <>
-                    <div className=" sm:m-5 m-2 flex flex-row p-1 items-center justify-evenly h-20  bg-gray-100 rounded-md">
-                      <div className=" h-[100%] flex m-1 ">
+                    <div className=" sm:m-5 m-2 flex flex-wrap flex-row p-1 items-center justify-evenly max-h-36  bg-gray-100 rounded-md">
+                      <div className=" h-24  flex m-1 ">
                         <img
                           src={product.productImg}
                           className="h-[100%]"
