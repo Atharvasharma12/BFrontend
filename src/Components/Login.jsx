@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import Cookie from "js-cookie";
+import { decodeToken } from "react-jwt";
 
 function Login() {
   const Navigate = useNavigate();
@@ -23,7 +25,17 @@ function Login() {
           payload: response.data,
         });
         alert(response.data.message);
-        if (response.data.message == "login successfull !") Navigate("/");
+        if (response.data.message == "login successfull !") {
+          const userCookie = Cookie.get("jwt");
+          localStorage.setItem("jwt", userCookie);
+
+          dispatch({
+            type: "setCookie",
+            payload: userCookie,
+          });
+
+          Navigate("/");
+        }
       })
       .catch((error) => console.log(error));
   };

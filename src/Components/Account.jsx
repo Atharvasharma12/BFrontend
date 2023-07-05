@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import Cookie from "js-cookie";
+import { decodeToken } from "react-jwt";
 
 function Account() {
   const { name, emailId, _id } = useSelector((state) => state.loggedInUser);
@@ -8,13 +10,32 @@ function Account() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    axios
-      .post("/account", { userId: _id })
-      .then((res) => {
-        setUserProducts(res.data);
-        console.log("account");
-      })
-      .catch((err) => console.log(err));
+    let userCookie = Cookie.get("jwt");
+
+    if (userCookie == undefined) {
+      userCookie = "no user found";
+      dispatch({
+        type: "setCookie",
+        payload: userCookie,
+      });
+    } else {
+      dispatch({
+        type: "setCookie",
+        payload: userCookie,
+      });
+      let decodedToken = decodeToken(userCookie);
+      dispatch({
+        type: "setLoggedInUser",
+        payload: decodedToken,
+      });
+      axios
+        .post("/account", { userId: _id })
+        .then((res) => {
+          setUserProducts(res.data);
+          console.log("account");
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   return (
@@ -39,6 +60,7 @@ function Account() {
                 </button>
                 <button
                   onClick={() => {
+                    localStorage.removeItem("jwt");
                     dispatch({
                       type: "setLoggedInUser",
                       payload: { name: "Profile" },
@@ -46,7 +68,14 @@ function Account() {
 
                     axios
                       .post("/logout", name)
-                      .then((response) => window.alert(response.data))
+                      .then((response) => {
+                        const userCookie = Cookie.get("jwt");
+                        dispatch({
+                          type: "setCookie",
+                          payload: userCookie,
+                        });
+                        window.alert(response.data);
+                      })
                       .catch((error) => console.log(error));
                   }}
                   class="sm:w-full  bg-gray-800 hover:bg-gray-700  text-white font-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded"

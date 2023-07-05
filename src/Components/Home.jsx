@@ -1,13 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FeatureProducts from "./FeatureProducts";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import Cookie from "js-cookie";
+import { decodeToken } from "react-jwt";
+
 const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    // let uc = Cookie.get("jwt");
+    let userCookie = localStorage.getItem("jwt");
+
+    if (userCookie == undefined) {
+      userCookie = "no user found";
+      dispatch({
+        type: "setCookie",
+        payload: userCookie,
+      });
+    } else {
+      dispatch({
+        type: "setCookie",
+        payload: userCookie,
+      });
+      let decodedToken = decodeToken(userCookie);
+      dispatch({
+        type: "setLoggedInUser",
+        payload: decodedToken,
+      });
+    }
+
     axios
       .get("/allProducts")
       .then((res) => {
@@ -17,7 +41,7 @@ const Home = () => {
         });
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   return (
     <>

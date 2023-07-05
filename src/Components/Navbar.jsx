@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
+import Cookie from "js-cookie";
 
 function Navbar() {
   const [toggle, setToggle] = useState(false);
@@ -99,10 +100,28 @@ function Navbar() {
                           type: "setLoggedInUser",
                           payload: { name: "Profile" },
                         });
+                        localStorage.removeItem("jwt");
 
                         axios
                           .post("/logout", name)
-                          .then((response) => console.log(response))
+                          .then((response) => {
+                            let userCookie = Cookie.get("jwt");
+
+                            if (userCookie == undefined) {
+                              userCookie = "no user found";
+                              dispatch({
+                                type: "setCookie",
+                                payload: userCookie,
+                              });
+                            } else {
+                              dispatch({
+                                type: "setCookie",
+                                payload: userCookie,
+                              });
+                            }
+
+                            console.log(response);
+                          })
                           .catch((error) => console.log(error));
                       }}
                     >
