@@ -204,7 +204,7 @@ function Sell() {
               class="w-full text-yellow-500 border  hover:text-gray-900 border-yellow-500  hover:bg-yellow-500  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center "
               onClick={() => setIsImgPresent(false)}
             >
-              Upload
+              Upload product
             </button>
           </form>
         </div>
