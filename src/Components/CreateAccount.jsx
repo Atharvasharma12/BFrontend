@@ -25,7 +25,7 @@ function CreateAccount() {
 
   return (
     <>
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center mt-8">
         <div class="  w-full max-w-sm p-4  rounded-lg shadow sm:p-6 md:p-8 bg-gray-800 border-gray-700">
           <div class="space-y-6">
             <h5 class="text-xl font-medium text-white">Sign up</h5>

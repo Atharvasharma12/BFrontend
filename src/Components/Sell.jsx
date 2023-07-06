@@ -1,10 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios, { Axios } from "axios";
 import { useSelector } from "react-redux";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Sell() {
   const { name, emailId, _id } = useSelector((state) => state.loggedInUser);
+  const [productImage, setProductImage] = useState();
+  const [isImgPresent, setIsImgPresent] = useState(false);
+  const Navigate = useNavigate();
 
   const [productDetail, setProductDetail] = useState({
     productName: "",
@@ -20,13 +26,16 @@ function Sell() {
   const handelSubmit = (e) => {
     e.preventDefault();
     console.log(productDetail);
-    axios
-      .post("/uploadProduct", productDetail)
-      .then((response) => {
-        console.log(response.data);
-        alert(response.data);
-      })
-      .catch((err) => console.log(err));
+
+    if (productDetail.productImg != "") {
+      axios
+        .post("/uploadProduct", productDetail)
+        .then((response) => {
+          console.log(response.data);
+          alert(response.data);
+        })
+        .catch((err) => console.log(err));
+    } else alert("select image !");
   };
 
   return (
@@ -141,21 +150,77 @@ function Sell() {
                 </div>
               </div>
             </div>
-            <div>
+            <div className="flex gap-2">
               <input
+                onChange={(e) => {
+                  setProductImage(e.target.files[0]);
+                }}
                 type="file"
+                required
                 className="rounded-lg p-1 w-full  text-white  border border-gray-500  focus:ring-3  focus:ring-yellow-500 ring-offset-gray-800 focus:ring-offset-gray-800"
               />
+              <button
+                type="button"
+                class="w-28 text-yellow-500 border  hover:text-gray-900 border-yellow-500  hover:bg-yellow-500  focus:outline-none font-medium rounded-lg text-sm  text-center "
+                onClick={(e) => {
+                  const imageForm = new FormData();
+                  imageForm.append("file", productImage);
+                  imageForm.append("upload_preset", "Boekenza");
+                  const id = toast.loading("uploading...", {
+                    closeButton: true,
+                  });
+
+                  axios
+                    .post(
+                      "https://api.cloudinary.com/v1_1/diyl2r9z2/image/upload",
+                      imageForm
+                    )
+                    .then((response) => {
+                      toast.update(id, {
+                        render: "Image Uploaded",
+                        type: "success",
+                        isLoading: false,
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeButton: true,
+                      });
+                      setIsImgPresent(true);
+                      setProductDetail({
+                        ...productDetail,
+                        productImg: response.data.url,
+                      });
+                      console.log(response.data.url);
+                      console.log(productDetail);
+                    })
+                    .catch((error) => console.log(error));
+                }}
+              >
+                Upload image
+              </button>
             </div>
+
             <button
               type="submit"
               class="w-full text-yellow-500 border  hover:text-gray-900 border-yellow-500  hover:bg-yellow-500  focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+              onClick={() => setIsImgPresent(false)}
             >
               Upload
             </button>
           </form>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

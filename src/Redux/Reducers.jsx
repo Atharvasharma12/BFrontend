@@ -9,9 +9,8 @@ const initialLoggedInUser = {
 export const loggedInUser = createReducer(initialLoggedInUser, {
   setLoggedInUser: (state, action) => {
     state.name = action.payload.name;
-    state.emailId = action.payload.email;
+    state.emailId = action.payload.emailId;
     state._id = action.payload._id;
-    console.log(action.payload);
   },
 });
 
@@ -51,7 +50,6 @@ export const cookie = createReducer(
       state.userCookie = action.payload.userCookie;
       let token = action.payload;
 
-      console.log(token);
     },
   }
 );

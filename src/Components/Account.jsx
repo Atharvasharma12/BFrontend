@@ -7,7 +7,7 @@ import { decodeToken } from "react-jwt";
 function Account() {
   const { name, emailId, _id } = useSelector((state) => state.loggedInUser);
   const [userProducts, setUserProducts] = useState([]);
-
+  console.log(emailId);
   const dispatch = useDispatch();
   useEffect(() => {
     let userCookie = Cookie.get("jwt");
@@ -84,7 +84,7 @@ function Account() {
                 </button>
               </div>
             </div>
-            <div className="sm:w-full w-96 h-96 border m-3 border-gray-200 p-3 rounded-xl">
+            <div className="sm:w-full w-96  border m-3 border-gray-200 p-3 rounded-xl">
               <h3>Your active products</h3>
               {userProducts.map((product, id) => {
                 return (
