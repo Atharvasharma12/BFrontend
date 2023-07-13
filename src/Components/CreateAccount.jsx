@@ -14,7 +14,7 @@ function CreateAccount() {
   const handelSubmitForm = () => {
     // e.preventDefault(); //prevent default behavior in case prevent refreshing
     axios
-      .post("/createAccount", loginData)
+      .post(process.env.REACT_APP_BASE_URL + "/createAccount", loginData)
       .then((response) => {
         // console.log(response.data);
         alert(response.data);
