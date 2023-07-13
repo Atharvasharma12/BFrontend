@@ -27,11 +27,12 @@ function Login() {
         alert(response.data.message);
         if (response.data.message == "login successfull !") {
           // const userCookie = Cookie.get("jwt");
-          localStorage.setItem("jwt", response.token);
+
+          localStorage.setItem("jwt", response.data.token);
 
           dispatch({
             type: "setCookie",
-            payload: response.token,
+            payload: response.data.token,
           });
 
           Navigate("/");
