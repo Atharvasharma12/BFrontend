@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import Cookie from "js-cookie";
 import { decodeToken } from "react-jwt";
 
+
 const Home = () => {
   const dispatch = useDispatch();
 
@@ -33,7 +34,7 @@ const Home = () => {
     }
 
     axios
-      .get("/allProducts")
+      .get(process.env.REACT_APP_BASE_URL + "/allProducts")
       .then((res) => {
         dispatch({
           type: "setAllProduct",
