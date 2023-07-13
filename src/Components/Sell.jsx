@@ -29,7 +29,7 @@ function Sell() {
 
     if (productDetail.productImg != "") {
       axios
-        .post("/uploadProduct", productDetail)
+        .post(process.env.REACT_APP_BASE_URL + "/uploadProduct", productDetail)
         .then((response) => {
           console.log(response.data);
           alert(response.data);

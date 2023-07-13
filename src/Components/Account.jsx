@@ -18,7 +18,7 @@ function Account() {
     console.log(productId);
 
     axios
-      .delete("/deleteProduct", {
+      .delete(process.env.REACT_APP_BASE_URL + "/deleteProduct", {
         headers: {
           productId: productId,
         },
@@ -60,7 +60,7 @@ function Account() {
         payload: decodedToken,
       });
       axios
-        .post("/account", { userId: _id })
+        .post(process.env.REACT_APP_BASE_URL + "/account", { userId: _id })
         .then((res) => {
           setUserProducts(res.data);
           console.log("account");
@@ -98,7 +98,7 @@ function Account() {
                     });
 
                     axios
-                      .post("/logout", name)
+                      .post(process.env.REACT_APP_BASE_URL + "/logout", name)
                       .then((response) => {
                         const userCookie = Cookie.get("jwt");
                         dispatch({
