@@ -18,7 +18,7 @@ function Login() {
   const handelSubmitForm = (e) => {
     e.preventDefault(); //prevent default behavior in case prevent refreshing
     axios
-      .post("/userLogin", loginData)
+      .post(process.env.REACT_APP_BASE_URL + "/userLogin", loginData)
       .then((response) => {
         dispatch({
           type: "setLoggedInUser",
