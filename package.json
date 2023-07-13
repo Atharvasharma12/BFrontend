@@ -2,7 +2,8 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://bbackend.atharvasharma12.repl.co/",
+  "proxy": "http://localhost:9000",
+  "proxy1": "https://bbackend.atharvasharma12.repl.co/",
  
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",

@@ -26,8 +26,8 @@ function Login() {
         });
         alert(response.data.message);
         if (response.data.message == "login successfull !") {
-          const userCookie = Cookie.get("jwt");
-          localStorage.setItem("jwt", userCookie);
+          // const userCookie = Cookie.get("jwt");
+          localStorage.setItem("jwt", response.token);
 
           dispatch({
             type: "setCookie",

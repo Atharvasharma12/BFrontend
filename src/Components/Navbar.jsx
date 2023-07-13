@@ -36,7 +36,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="bg-gray-900 h-14 flex justify-around items-center ">
+      <div className="bg-gray-900 h-14 flex  items-center justify-around">
         <div>
           <Link to="/">
             <h2 className=" text-white text-3xl font-bold cursor-pointer ">
@@ -141,11 +141,9 @@ function Navbar() {
               </div>
             </div>
           </ul>
-        </div>;
-        {
-          /* for mobile */
-        }
-        <div className="text-white sm:hidden flex items-center gap-4">
+        </div>
+        {/* for mobile */}
+        <div className="text-white sm:hidden flex  items-center gap-4">
           <div className="flex gap-2 content-center item-center ml-1  ">
             <img
               onClick={() => setProfileToggle((prev) => !prev)}
@@ -243,7 +241,7 @@ function Navbar() {
               <li className="mb-4">Contact</li>
             </ul>
           </div>
-        </div>;
+        </div>
       </div>
     </>
   );
