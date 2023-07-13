@@ -31,7 +31,7 @@ function Login() {
 
           dispatch({
             type: "setCookie",
-            payload: userCookie,
+            payload: response.token,
           });
 
           Navigate("/");
