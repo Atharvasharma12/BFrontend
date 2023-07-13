@@ -11,7 +11,7 @@ function AllProducts() {
   useEffect(() => {
     const gettingItems = () => {
       axios
-        .get("/allProducts")
+        .get("https://bbackend.atharvasharma12.repl.co/allProducts")
         .then((res) => {
           setItems(res.data);
           dispatch({
