@@ -17,18 +17,22 @@ function Login() {
 
   const handelSubmitForm = (e) => {
     e.preventDefault(); //prevent default behavior in case prevent refreshing
+    console.log(process.env.REACT_APP_BASE_URL);
+
     axios
       .post(process.env.REACT_APP_BASE_URL + "/userLogin", loginData)
       .then((response) => {
+        console.log(response);
         dispatch({
           type: "setLoggedInUser",
           payload: response.data,
         });
         alert(response.data.message);
         if (response.data.message == "login successfull !") {
+          Cookie.set("jwt", response.data.token);
+          // const userCookie = Cookie.get("jwt");
           const userCookie = Cookie.get("jwt");
           localStorage.setItem("jwt", userCookie);
-
           dispatch({
             type: "setCookie",
             payload: userCookie,

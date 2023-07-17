@@ -108,6 +108,8 @@ function Navbar() {
                             name
                           )
                           .then((response) => {
+                            Cookie.remove("jwt");
+
                             let userCookie = Cookie.get("jwt");
 
                             if (userCookie == undefined) {
@@ -141,10 +143,8 @@ function Navbar() {
               </div>
             </div>
           </ul>
-        </div>;
-        {
-          /* for mobile */
-        }
+        </div>
+        {/* for mobile */}
         <div className="text-white sm:hidden flex items-center gap-4">
           <div className="flex gap-2 content-center item-center ml-1  ">
             <img
@@ -189,7 +189,10 @@ function Navbar() {
 
                       axios
                         .post(process.env.REACT_APP_BASE_URL + "/logout", name)
-                        .then((response) => console.log(response))
+                        .then((response) => {
+                          console.log(response);
+                          Cookie.remove("jwt");
+                        })
                         .catch((error) => console.log(error));
                     }}
                   >
@@ -243,7 +246,7 @@ function Navbar() {
               <li className="mb-4">Contact</li>
             </ul>
           </div>
-        </div>;
+        </div>
       </div>
     </>
   );
