@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios, { Axios } from "axios";
 import { useSelector } from "react-redux";
+import Cookie from "js-cookie";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Sell() {
   const { name, emailId, _id } = useSelector((state) => state.loggedInUser);
+  const { userCookie } = useSelector((state) => state.cookie);
   const [productImage, setProductImage] = useState();
   const [isImgPresent, setIsImgPresent] = useState(false);
   const Navigate = useNavigate();
+  console.log(userCookie);
 
   const [productDetail, setProductDetail] = useState({
     productName: "",
@@ -21,15 +24,25 @@ function Sell() {
     seller: name,
     sellerId: _id,
     SellerEmail: emailId,
+    jwt: userCookie,
   });
 
   const handelSubmit = (e) => {
     e.preventDefault();
     console.log(productDetail);
+    let userCookie = Cookie.get("jwt");
 
     if (productDetail.productImg != "") {
       axios
-        .post(process.env.REACT_APP_BASE_URL + "/uploadProduct", productDetail)
+        .post(
+          process.env.REACT_APP_BASE_URL + "/uploadProduct",
+          productDetail,
+          {
+            headers: {
+              jwt: userCookie,
+            },
+          }
+        )
         .then((response) => {
           console.log(response.data);
           alert(response.data);
