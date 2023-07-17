@@ -12,11 +12,10 @@ function Account() {
   const [userProducts, setUserProducts] = useState([]);
   const [test, setTest] = useState(false);
   const [loading, setLoading] = useState(true);
-  console.log(emailId);
   const dispatch = useDispatch();
 
   const handleDelProduct = (productId) => {
-    console.log(productId);
+    // console.log(productId);
 
     axios
       .delete(process.env.REACT_APP_BASE_URL + "/deleteProduct", {
@@ -26,7 +25,6 @@ function Account() {
       })
       .then((response) => {
         setTest(!test);
-        console.log(response);
         toast(response.data, {
           position: "top-center",
           autoClose: 5000,
@@ -41,7 +39,6 @@ function Account() {
       .catch((error) => console.log(error));
   };
 
-  console.log(localStorage.getItem("jwt"));
   useEffect(() => {
     let userCookie = localStorage.getItem("jwt");
 
@@ -76,7 +73,6 @@ function Account() {
         .then((res) => {
           setLoading(false);
           setUserProducts(res.data);
-          console.log("account");
         })
         .catch((err) => console.log(err));
     }
@@ -115,12 +111,22 @@ function Account() {
                       .then((response) => {
                         Cookie.remove("jwt");
                         const userCookie = Cookie.get("jwt");
-                        console.log(userCookie);
+                        // console.log(userCookie);
                         dispatch({
                           type: "setCookie",
                           payload: userCookie,
                         });
-                        window.alert(response.data);
+
+                        toast.success(response.data, {
+                          position: "top-center",
+                          autoClose: 5000,
+                          hideProgressBar: false,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                          theme: "light",
+                        });
                       })
                       .catch((error) => console.log(error));
                   }}
