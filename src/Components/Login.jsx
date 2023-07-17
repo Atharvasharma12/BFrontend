@@ -35,7 +35,7 @@ function Login() {
           localStorage.setItem("jwt", userCookie);
           dispatch({
             type: "setCookie",
-            payload: userCookie,
+            payload: response.data.token,
           });
 
           Navigate("/");

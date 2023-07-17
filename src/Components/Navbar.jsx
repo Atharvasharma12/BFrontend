@@ -36,7 +36,7 @@ function Navbar() {
 
   return (
     <>
-      <div className="bg-gray-900 h-14 flex justify-around items-center ">
+      <div className="bg-gray-900 h-14 flex  items-center justify-around">
         <div>
           <Link to="/">
             <h2 className=" text-white text-3xl font-bold cursor-pointer ">
@@ -246,6 +246,7 @@ function Navbar() {
               <li className="mb-4">Contact</li>
             </ul>
           </div>
+        </div>
         </div>
       </div>
     </>

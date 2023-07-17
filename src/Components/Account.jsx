@@ -41,8 +41,9 @@ function Account() {
       .catch((error) => console.log(error));
   };
 
+  console.log(localStorage.getItem("jwt"));
   useEffect(() => {
-    let userCookie = Cookie.get("jwt");
+    let userCookie = localStorage.getItem("jwt");
 
     if (userCookie == undefined) {
       userCookie = "no user found";
@@ -79,7 +80,7 @@ function Account() {
         })
         .catch((err) => console.log(err));
     }
-  }, [test]);
+  }, []);
 
   return (
     <>

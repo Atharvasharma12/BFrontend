@@ -47,8 +47,10 @@ export const cookie = createReducer(
   { userCookie: "" },
   {
     setCookie: (state, action) => {
-      state.userCookie = action.payload.userCookie;
+      state.userCookie = action.payload;
       let token = action.payload;
+    
+      
 
     },
   }
