@@ -13,7 +13,6 @@ function Sell() {
   const [productImage, setProductImage] = useState();
   const [isImgPresent, setIsImgPresent] = useState(false);
   const Navigate = useNavigate();
-  console.log(userCookie);
 
   const [productDetail, setProductDetail] = useState({
     productName: "",
@@ -29,7 +28,7 @@ function Sell() {
 
   const handelSubmit = (e) => {
     e.preventDefault();
-    console.log(productDetail);
+    // console.log(productDetail);
     let userCookie = Cookie.get("jwt");
 
     if (productDetail.productImg != "") {
@@ -44,11 +43,31 @@ function Sell() {
           }
         )
         .then((response) => {
-          console.log(response.data);
-          alert(response.data);
+          // console.log(response.data);
+          toast.success(response.data, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         })
         .catch((err) => console.log(err));
-    } else alert("select image !");
+    } else {
+      toast.warn("Upload Image!", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
   };
 
   return (

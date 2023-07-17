@@ -4,7 +4,6 @@ import { productDetails } from "./ProductList";
 import { Link } from "react-router-dom";
 
 function Products(props) {
-  console.log(props);
   const items = productDetails;
 
   return (

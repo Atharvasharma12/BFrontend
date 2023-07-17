@@ -2,12 +2,19 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { element } from "prop-types";
 
 function AllProducts() {
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.allProducts);
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+
+  const handleSearch = (e) => {
+    const s = e.target.value.toLowerCase();
+    setSearch(s);
+  };
 
   useEffect(() => {
     const gettingItems = () => {
@@ -65,16 +72,14 @@ function AllProducts() {
                 </svg>
               </div>
               <input
+                onChange={(e) => handleSearch(e)}
                 type="search"
                 id="default-search"
                 class="block w-full p-4 pl-10 text-sm border  rounded-lg outline-none  bg-white border-gray-400  "
                 placeholder="Search "
                 required
               />
-              <button
-                type="submit"
-                class="text-white absolute right-2.5 bottom-2.5   focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 bg-gray-900 hover:bg-gray-700 focus:ring-gray-800"
-              >
+              <button class="text-white absolute right-2.5 bottom-2.5   focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2 bg-gray-900 hover:bg-gray-700 focus:ring-gray-800">
                 Search
               </button>
             </div>
@@ -102,45 +107,54 @@ function AllProducts() {
               <span class="sr-only">Loading...</span>
             </div>
           ) : (
-            items.map((item, id) => {
-              return (
-                <>
-                  <div className="m-4" key={id}>
-                    <div className=" w-72 bg-gray-800 border border-gray-200 rounded-lg shadow  dark:border-gray-700 hover:scale-105 ease-in duration-150 ">
-                      <a
-                        href="@"
-                        className="flex justify-center bg-white rounded-lg"
-                      >
-                        <img
-                          className="p-1 rounded-t-lg h-60"
-                          src={item.productImg}
-                          alt="productimage"
-                        />
-                      </a>
-                      <div className="px-5 pb-5">
-                        <a href="@">
+            items
+              .filter((element) => {
+                return (
+                  element.productName.toLowerCase().includes(search) ||
+                  element.productCategory.toLowerCase().includes(search)
+                );
+              })
+              .map((item, id) => {
+                return (
+                  <>
+                    <div className="m-4" key={id}>
+                      <div className=" w-72 bg-gray-800 border border-gray-200 rounded-lg shadow  dark:border-gray-700 hover:scale-105 ease-in duration-150 ">
+                        <Link
+                          onClick={() => handleOnPurchase(item)}
+                          to="/SelectedProduct"
+                          className="flex justify-center bg-white rounded-lg"
+                        >
+                          <img
+                            className="p-1 rounded-t-lg h-60"
+                            src={item.productImg}
+                            alt="productimage"
+                          />
+                        </Link>
+                        <div className="px-5 pb-5">
+                          <p className="text-slate-500">
+                            {item.productCategory}
+                          </p>
                           <h5 className="text-xl font-semibold tracking-tight text-white text-left">
                             {item.productName}
                           </h5>
-                        </a>
-                        <div className="flex items-center justify-between">
-                          <span className="text-3xl font-bold text-white">
-                            Rs.{item.productPrice}
-                          </span>
-                          <Link
-                            onClick={() => handleOnPurchase(item)}
-                            to="/SelectedProduct"
-                            className="my-2  bg-yellow-500 hover:bg-transparent text-black-500 font-semibold hover:text-yellow-500 py-2 px-4 border border-yellow-500 hover:border-yellow-500 rounded "
-                          >
-                            Purchase
-                          </Link>
+                          <div className="flex items-center justify-between">
+                            <span className="text-3xl font-bold text-white">
+                              Rs.{item.productPrice}
+                            </span>
+                            <Link
+                              onClick={() => handleOnPurchase(item)}
+                              to="/SelectedProduct"
+                              className="my-2  bg-yellow-500 hover:bg-transparent text-black-500 font-semibold hover:text-yellow-500 py-2 px-4 border border-yellow-500 hover:border-yellow-500 rounded "
+                            >
+                              Purchase
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </>
-              );
-            })
+                  </>
+                );
+              })
           )}
         </div>
       </section>

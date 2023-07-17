@@ -6,6 +6,9 @@ import { useDispatch } from "react-redux";
 import Cookie from "js-cookie";
 import { decodeToken } from "react-jwt";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Login() {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
@@ -17,18 +20,26 @@ function Login() {
 
   const handelSubmitForm = (e) => {
     e.preventDefault(); //prevent default behavior in case prevent refreshing
-    console.log(process.env.REACT_APP_BASE_URL);
 
     axios
       .post(process.env.REACT_APP_BASE_URL + "/userLogin", loginData)
       .then((response) => {
-        console.log(response);
         dispatch({
           type: "setLoggedInUser",
           payload: response.data,
         });
-        alert(response.data.message);
+
         if (response.data.message == "login successfull !") {
+          toast.success(response.data.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
           Cookie.set("jwt", response.data.token);
           // const userCookie = Cookie.get("jwt");
           const userCookie = Cookie.get("jwt");
@@ -39,6 +50,17 @@ function Login() {
           });
 
           Navigate("/");
+        } else {
+          toast.error(response.data.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
       })
       .catch((error) => console.log(error));
@@ -128,6 +150,18 @@ function Login() {
           </form>
         </div>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

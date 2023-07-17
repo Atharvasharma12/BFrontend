@@ -185,20 +185,20 @@ function Footer() {
                   </li>
 
                   <li>
-                    <a
-                      href="@"
+                    <Link
+                      to="/"
                       class="text-gray-700 transition hover:text-yellow-500 dark:text-gray-200"
                     >
                       Contact
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a
-                      href="@"
+                    <Link
+                      to="/"
                       class="text-gray-700 transition hover:text-yellow-500 dark:text-gray-200"
                     >
                       Meet the Team
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
