@@ -52,7 +52,10 @@ function App() {
         <Route path="Allproducts" element={<AllProducts />} />
         <Route path="Account" element={<Protected Component={Account} />} />
         <Route path="Sell" element={<Protected Component={Sell} />} />
-        <Route path="SelectedProduct" element={<SelectedProduct />} />
+        <Route
+          path="SelectedProduct"
+          element={<Protected Component={SelectedProduct} />}
+        />
       </Routes>
     </>
   );
