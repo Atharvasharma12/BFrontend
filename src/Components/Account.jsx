@@ -11,7 +11,6 @@ function Account() {
   const { name, emailId, _id } = useSelector((state) => state.loggedInUser);
   const [userProducts, setUserProducts] = useState([]);
   const [test, setTest] = useState(false);
-  console.log(emailId);
   const dispatch = useDispatch();
 
   const handleDelProduct = (productId) => {
@@ -40,8 +39,9 @@ function Account() {
       .catch((error) => console.log(error));
   };
 
+  console.log(localStorage.getItem("jwt"));
   useEffect(() => {
-    let userCookie = Cookie.get("jwt");
+    let userCookie = localStorage.getItem("jwt");
 
     if (userCookie == undefined) {
       userCookie = "no user found";
@@ -60,14 +60,17 @@ function Account() {
         payload: decodedToken,
       });
       axios
-        .post(process.env.REACT_APP_BASE_URL + "/account", { userId: _id })
+        .post(process.env.REACT_APP_BASE_URL + "/account", {
+          userId: _id,
+          jwt: userCookie,
+        })
         .then((res) => {
           setUserProducts(res.data);
           console.log("account");
         })
         .catch((err) => console.log(err));
     }
-  }, [test]);
+  }, []);
 
   return (
     <>
