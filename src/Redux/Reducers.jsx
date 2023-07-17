@@ -30,6 +30,7 @@ export const usersProduct = createReducer(initialProducts, {
     state.productDescription = action.payload.productDescription;
     state.productPrice = action.payload.productPrice;
     state.productImg = action.payload.productImg;
+    state.sellerId = action.payload.sellerId;
   },
 });
 
