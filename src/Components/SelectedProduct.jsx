@@ -2,6 +2,11 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function SelectedProduct() {
   const Navigate = useNavigate();
 
@@ -13,6 +18,36 @@ function SelectedProduct() {
     productImg,
     sellerId,
   } = useSelector((state) => state.usersProduct);
+
+  const { emailId, name } = useSelector((state) => state.loggedInUser);
+  const handleInform = () => {
+    const id = toast.loading("Reaching seller...", {
+      closeButton: true,
+    });
+    axios
+      .post(process.env.REACT_APP_BASE_URL + "/sendMailerToSeller", {
+        productName,
+        productCategory,
+        productDescription,
+        productPrice,
+        productImg,
+        sellerId,
+        emailId,
+        name,
+      })
+      .then((response) => {
+        toast.update(id, {
+          render: response.data,
+          type: "success",
+          isLoading: false,
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeButton: true,
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
   useEffect(() => {
     productName ? Navigate() : Navigate("/AllProducts");
     console.log("routed");
@@ -36,17 +71,29 @@ function SelectedProduct() {
               <span className="mt-5">{productDescription}</span>
               <div className="flex flex-col">
                 <span className="text-xl text-green-600">{productPrice}</span>
-                <Link
-                  to="/SelectedProduct"
+                <button
+                  onClick={() => handleInform()}
                   className="my-2  bg-gray-900 hover:bg-gray-950 text-white font-semibold py-2 px-4 border   rounded "
                 >
                   Inform Seller
-                </Link>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

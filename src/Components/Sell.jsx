@@ -221,8 +221,8 @@ function Sell() {
                         ...productDetail,
                         productImg: response.data.url,
                       });
-                      console.log(response.data.url);
-                      console.log(productDetail);
+                      // console.log(response.data.url);
+                      // console.log(productDetail);
                     })
                     .catch((error) => console.log(error));
                 }}
