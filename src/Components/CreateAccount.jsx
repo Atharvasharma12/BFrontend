@@ -26,7 +26,7 @@ function CreateAccount() {
         // alert(response.data);
         toast.info(response.data, {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -52,7 +52,7 @@ function CreateAccount() {
             render: response.data,
             type: "success",
             isLoading: false,
-            autoClose: 3000,
+            autoClose: 1000,
             hideProgressBar: false,
             closeButton: true,
           });
@@ -62,7 +62,7 @@ function CreateAccount() {
     } else {
       toast.warn("invalid details", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -183,7 +183,7 @@ function CreateAccount() {
       </div>
       <ToastContainer
         position="top-center"
-        autoClose={5000}
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={true}

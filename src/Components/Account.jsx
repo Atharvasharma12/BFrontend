@@ -15,7 +15,7 @@ function Account() {
   const dispatch = useDispatch();
 
   const handleDelProduct = (productId) => {
-    // console.log(productId);
+    console.log(productId);
 
     axios
       .delete(process.env.REACT_APP_BASE_URL + "/deleteProduct", {
@@ -27,7 +27,7 @@ function Account() {
         setTest(!test);
         toast(response.data, {
           position: "top-center",
-          autoClose: 5000,
+          autoClose: 1000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -76,7 +76,8 @@ function Account() {
         })
         .catch((err) => console.log(err));
     }
-  }, []);
+    console.log("hitt");
+  }, [test]);
 
   return (
     <>
@@ -211,7 +212,7 @@ function Account() {
       </section>
       <ToastContainer
         position="top-center"
-        autoClose={5000}
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={true}
