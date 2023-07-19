@@ -46,7 +46,7 @@ function Sell() {
           // console.log(response.data);
           toast.success(response.data, {
             position: "top-center",
-            autoClose: 5000,
+            autoClose: 1000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -54,12 +54,13 @@ function Sell() {
             progress: undefined,
             theme: "light",
           });
+          Navigate("/Account");
         })
         .catch((err) => console.log(err));
     } else {
       toast.warn("Upload Image!", {
         position: "top-center",
-        autoClose: 5000,
+        autoClose: 1000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -212,7 +213,7 @@ function Sell() {
                         render: "Image Uploaded",
                         type: "success",
                         isLoading: false,
-                        autoClose: 3000,
+                        autoClose: 1000,
                         hideProgressBar: false,
                         closeButton: true,
                       });
@@ -224,7 +225,17 @@ function Sell() {
                       // console.log(response.data.url);
                       // console.log(productDetail);
                     })
-                    .catch((error) => console.log(error));
+                    .catch((error) => {
+                      console.log(error.response.data.error.message);
+                      toast.update(id, {
+                        render: error.response.data.error.message,
+                        type: "error",
+                        isLoading: false,
+                        autoClose: 1000,
+                        hideProgressBar: false,
+                        closeButton: true,
+                      });
+                    });
                 }}
               >
                 Upload image
@@ -243,7 +254,7 @@ function Sell() {
       </div>
       <ToastContainer
         position="top-center"
-        autoClose={5000}
+        autoClose={1000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick={true}
