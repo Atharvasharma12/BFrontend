@@ -35,7 +35,7 @@ function Products(props) {
                         Rs.{item.price}
                       </span>
                       <Link
-                        to="SelectedProduct"
+                        to="AllProducts"
                         className="my-2  bg-yellow-500 hover:bg-transparent text-black-500 font-semibold hover:text-yellow-500 py-2 px-4 border border-yellow-500 hover:border-yellow-500 rounded "
                       >
                         <button>Purchase</button>
